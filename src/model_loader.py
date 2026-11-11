@@ -6,7 +6,7 @@ import pandas as pd
 
 
 ROOT = Path(__file__).resolve().parent.parent
-MODEL_PATH = ROOT / "models" / "dmi_svm_model.joblib"
+MODEL_PATH = ROOT / "models" / "DMI_Predict_SVM.joblib"
 TRAIN_PATH = ROOT / "data" / "train.csv"
 TARGET_COLUMN = "prognosis"
 
@@ -120,16 +120,17 @@ def load_model():
     if classes is None:
         classes = getattr(model, "classes_", [])
 
-    if not classes and hasattr(model, "named_steps"):
-        final_estimator = list(
-            model.named_steps.values()
-        )[-1]
+    if classes is None or len(classes) == 0:
+        if hasattr(model, "named_steps"):
+            final_estimator = list(
+                model.named_steps.values()
+            )[-1]
 
-        classes = getattr(
-            final_estimator,
-            "classes_",
-            []
-        )
+            classes = getattr(
+                final_estimator,
+                "classes_",
+                []
+            )
 
     system = {
         "model": model,
