@@ -1,0 +1,153 @@
+/* Clean light theme for the terminal dashboard */
+Screen {
+    background: #F4F7FC;
+    color: #17365D;
+}
+
+Header {
+    background: #174EA6;
+    color: #FFFFFF;
+}
+
+Header .header--title,
+Header .header--subtitle {
+    color: #FFFFFF;
+}
+
+#root {
+    height: 1fr;
+    padding: 0 1;
+}
+
+#banner {
+    height: 2;
+    content-align: center middle;
+    background: #FFFFFF;
+    color: #174EA6;
+    text-style: bold;
+    border: round #1D4ED8;
+}
+
+#panels {
+    height: 1fr;
+    min-height: 5;
+}
+
+.panel {
+    width: 1fr;
+    height: 1fr;
+    padding: 1;
+    margin: 0 1;
+    border: round #A9C5E8;
+    background: #FFFFFF;
+}
+
+#available-panel,
+#selected-panel {
+    border-title-color: #174EA6;
+    border-subtitle-color: #42658F;
+}
+
+#search {
+    height: 3;
+    margin-bottom: 1;
+    background: #FFFFFF;
+    color: #17365D;
+    border: round #A9C5E8;
+}
+
+#search:focus {
+    border: round #1D4ED8;
+}
+
+OptionList {
+    height: 1fr;
+    background: #FFFFFF;
+    color: #17365D;
+    border: round #D5E1F0;
+    scrollbar-color: #7EA6D8;
+    scrollbar-background: #EDF2F8;
+}
+
+OptionList:focus {
+    border: round #1D4ED8;
+    background: #FFFFFF;
+    background-tint: 0%;
+}
+
+OptionList > .option-list--option-highlighted,
+OptionList:focus > .option-list--option-highlighted,
+OptionList > .option-list--option-hover {
+    background: #DCEAFF;
+    color: #123D78;
+    text-style: bold;
+}
+
+#selected > .option-list--option-highlighted,
+#selected:focus > .option-list--option-highlighted,
+#selected > .option-list--option-hover {
+    background: #FFFFFF;
+    color: #17365D;
+    text-style: none;
+}
+
+#actions {
+    height: 3;
+    align: center middle;
+    margin-top: 0;
+}
+
+Button {
+    width: 1fr;
+    min-width: 0;
+    margin: 0 1;
+    padding: 0 1;
+    content-align: center middle;
+    background: #FFFFFF;
+    color: #174EA6;
+    border: round #A9C5E8;
+}
+
+Button:hover,
+Button:focus {
+    background: #DCEAFF;
+    color: #123D78;
+    border: round #1D4ED8;
+}
+
+Button.primary {
+    background: #1D4ED8;
+    color: #FFFFFF;
+    text-style: bold;
+    border: round #1D4ED8;
+}
+
+Button.primary:hover,
+Button.primary:focus {
+    background: #174EA6;
+    color: #FFFFFF;
+    border: round #174EA6;
+}
+
+#result {
+    height: auto;
+    min-height: 6;
+    max-height: 8;
+    padding: 1 2;
+    content-align: center middle;
+    border: round #A9C5E8;
+    background: #F8FBFF;
+    color: #17365D;
+}
+
+#result.has-result {
+    border: round #174EA6;
+    background: #EAF2FF;
+}
+
+#hint {
+    height: 1;
+    content-align: center middle;
+    color: #42658F;
+}
+

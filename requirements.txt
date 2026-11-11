@@ -1,0 +1,7 @@
+
+textual
+rich
+pandas
+numpy
+joblib
+scikit-learn

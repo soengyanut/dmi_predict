@@ -1,0 +1,45 @@
+# DMI-Predict
+
+DMI-Predict is a terminal application that uses a pre-trained Support Vector Machine (SVM) pipeline to predict a disease from selected symptoms. 
+
+## How the model works
+
+The repository's training data contains 1,000 examples. Each example has 64 symptom columns with binary values (`1` means present and `0` means absent) and a `prognosis` column containing the disease label. The model predicts one of 11 disease classes.
+
+The saved model is a scikit-learn pipeline with two steps:
+
+1. **Scale the symptom values.** `StandardScaler` transforms the 64 binary input features using the statistics learned during training.
+2. **Classify the symptom pattern.** An SVM (`SVC`) compares the scaled pattern with patterns learned during training and predicts a disease class. The saved classifier has probability estimates enabled.
+
+## Prediction flow
+
+1. **Load the model.** When the application starts, `src/model_loader.py` loads the joblib artifact. It gets the symptom names from the trained pipeline and checks them against `data/train.csv` when that file is available.
+2. **Choose symptoms.** The user selects symptoms in the terminal interface. Selected symptoms are held as their original feature names.
+3. **Validate the selection.** `src/prediction.py` checks that the selected names are among the model's 64 expected features.
+4. **Build the model input.** The app creates a one-row pandas DataFrame with columns in the exact order expected by the trained pipeline. A selected symptom is set to `1`; every other symptom is set to `0`.
+5. **Run the pipeline.** The pipeline scales the row and passes it to the SVM. The predicted class is returned as the disease result.
+6. **Calculate probability estimates.** When supported by the classifier, `predict_proba` returns a probability estimate for each disease class. The prediction helper sorts these estimates from highest to lowest. The terminal interface currently displays the predicted disease.
+
+The app loads the saved model at runtime; it does not train or update the model when a prediction is requested. The repository contains the training and test CSV files, but no model-training script.
+
+## Run the application
+
+Install the listed dependencies, then run the terminal application from the project directory:
+
+```bash
+pip install -r requirements.txt
+python dmi_predict.py
+```
+
+Use the arrow keys and Enter to select or deselect symptoms. 
+The action buttons can also be used to add, remove, clear, predict, or exit.
+
+## Project files
+
+- `dmi_predict.py` — Textual terminal interface and button actions.
+- `dmi_predict.tcss` — Interface styling.
+- `src/model_loader.py` — Loads and validates the model artifact and feature names.
+- `src/prediction.py` — Builds the prediction input and calls the model.
+- `models/dmi_svm_model.joblib` — Pre-trained scikit-learn pipeline.
+- `data/train.csv` — Training examples with symptom features and prognosis labels.
+- `data/test.csv` — Test examples with the same columns.
